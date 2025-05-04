@@ -1,0 +1,247 @@
+$background: #161616;
+$primary: #f4f4f4;
+$secondary: #000;
+$tertiary: #199fff;
+button {
+	padding: 0.4rem 0.6rem;
+	background-color: $tertiary;
+	border-radius: 0.4rem;
+	cursor: pointer;
+	font-weight: bold;
+	transition: all 0.2s;
+	font-size: 1rem;
+	border: none;
+
+	@media (min-width: 992px) {
+		padding: 0.6rem 1rem;
+	}
+
+	&:hover {
+		background-color: rgba($tertiary, 0.9);
+	}
+
+	&:active {
+		background-color: rgba($tertiary, 0.8);
+	}
+}
+
+#app {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	background-color: $background;
+	overflow-x: hidden;
+}
+
+#background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+	background-size: 5vw 5vw;
+
+	&::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: radial-gradient(ellipse at center, transparent 80%, rgba(0, 0, 0, 0.2)),
+			radial-gradient(ellipse at center, transparent 90%, rgba(10, 10, 10, 0.4));
+		pointer-events: none;
+	}
+
+	@media (min-width: 768px) {
+		background-size: 3vw 3vw;
+	}
+
+	@media (min-width: 1200px) {
+		background-size: 2vw 2vw;
+	}
+}
+
+header {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	position: relative;
+	z-index: 10;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-color: $background;
+		box-shadow: 0 10px 20px rgba($background, 0.8);
+		z-index: -1;
+	}
+}
+
+main {
+	z-index: 1;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 1280px;
+	padding: 1rem;
+	gap: 3rem;
+
+	.btn-selections {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 1rem;
+		width: 100%;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
+
+		.algorithms {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.8rem;
+			align-items: center;
+
+			.dropdown-container {
+				position: relative;
+			}
+
+			#select-algorithm {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				background-color: $primary;
+				padding: 0.4rem 0.6rem;
+				border-radius: 0.4rem;
+				cursor: pointer;
+				font-weight: bold;
+				gap: 0.5rem;
+
+				p {
+					color: $secondary;
+					margin: 0;
+				}
+
+				span {
+					display: flex;
+					align-items: center;
+
+					svg {
+						width: 1rem;
+					}
+				}
+
+				&:hover {
+					background-color: rgba($primary, 0.9);
+				}
+
+				&:active {
+					background-color: rgba($primary, 0.8);
+				}
+			}
+
+			.algorithm-options {
+				position: absolute;
+				top: 3rem;
+				left: 0;
+				background-color: $primary;
+				border-radius: 0.4rem;
+				display: flex;
+				flex-direction: column;
+				visibility: hidden;
+				opacity: 0;
+				transform: translateY(-10px);
+				transition: all 0.2s ease;
+				overflow: hidden;
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+				.option {
+					padding: 0.4rem 1rem;
+					cursor: pointer;
+					font-weight: bold;
+					color: $secondary;
+					transition: all 0.2s;
+
+					&:hover {
+						background-color: $tertiary;
+						color: $primary;
+					}
+				}
+
+				&.show {
+					visibility: visible;
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.speaker-btn {
+				width: 2rem;
+				cursor: pointer;
+
+				&.hidden {
+					display: none;
+				}
+			}
+		}
+
+		.customization-btns {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			width: 100%;
+
+			@media (min-width: 992px) {
+				flex-direction: row;
+				justify-content: flex-end;
+				width: auto;
+			}
+
+			.slider-group {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+
+				label {
+					font-weight: bold;
+					color: $primary;
+				}
+
+				input[type="range"] {
+					width: 100%;
+					margin-top: 0.3rem;
+				}
+			}
+		}
+	}
+
+	#bar-container {
+		width: 100%;
+		flex: 1 1 auto;
+		min-height: 250px;
+		max-height: 500px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		overflow: hidden;
+		margin-bottom: 1rem;
+
+		.bar {
+			background: linear-gradient(0deg, rgba(22, 22, 22, 1) 5%, rgba(210, 210, 210, 1) 100%);
+		}
+	}
+}
